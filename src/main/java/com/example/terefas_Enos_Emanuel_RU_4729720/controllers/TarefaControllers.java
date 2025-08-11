@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("tarefas")
+@RequestMapping("/tarefas")
 public class TarefaControllers {
 
     private final TarefasService tarefasService;
@@ -22,8 +22,8 @@ public class TarefaControllers {
 
     @PostMapping("/cadastrar")
     public ResponseEntity criarTarefaController(@RequestBody CriarTarefaDto criarTarefaDto) {
-        tarefasService.criarNovaTarerfaService(criarTarefaDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        Tarefa tarefa = tarefasService.criarNovaTarerfaService(criarTarefaDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(tarefa);
     }
 
     @GetMapping("/todastarefas")
@@ -39,7 +39,7 @@ public class TarefaControllers {
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Tarefa> atualizarTarefaController(@PathVariable(value = "id")Long id, AtualizarTarefaDto atualizarTarefaDto){
+    public ResponseEntity<Tarefa> atualizarTarefaController(@PathVariable(value = "id")Long id, @RequestBody AtualizarTarefaDto atualizarTarefaDto){
         Tarefa tarefa = tarefasService.atualizarTarefaService(id, atualizarTarefaDto);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(tarefa);
 

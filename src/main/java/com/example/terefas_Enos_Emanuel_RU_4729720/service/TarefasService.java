@@ -22,7 +22,7 @@ public class TarefasService {
     }
 
     @Transactional
-    public void criarNovaTarerfaService(CriarTarefaDto criarTarefaDto) {
+    public Tarefa criarNovaTarerfaService(CriarTarefaDto criarTarefaDto) {
         if (criarTarefaDto.dataDeEntrega().isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("data de entrega nao pode ser antes do dia de hoje");
         }
@@ -31,6 +31,7 @@ public class TarefasService {
         tarefa.setDataDeEntrega(criarTarefaDto.dataDeEntrega());
         tarefa.setResponsavel(criarTarefaDto.responsavel());
         tarefaRespository.save(tarefa);
+        return tarefa;
     }
 
     @Transactional
