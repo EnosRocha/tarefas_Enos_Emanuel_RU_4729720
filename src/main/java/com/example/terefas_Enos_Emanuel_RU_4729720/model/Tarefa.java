@@ -4,6 +4,7 @@ package com.example.terefas_Enos_Emanuel_RU_4729720.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,7 +18,7 @@ public class Tarefa implements Serializable {
 
     private String nomeDaTarefa;
 
-    private LocalDateTime dataDeEntrega;
+    private LocalDate dataDeEntrega;
 
     private String  responsavel;
 
@@ -25,11 +26,11 @@ public class Tarefa implements Serializable {
         return tarefasId;
     }
 
-    public LocalDateTime getDataDeEntrega() {
+    public LocalDate getDataDeEntrega() {
         return dataDeEntrega;
     }
 
-    public void setDataDeEntrega(LocalDateTime dataDeEntrega) {
+    public void setDataDeEntrega(LocalDate dataDeEntrega) {
         this.dataDeEntrega = dataDeEntrega;
     }
 

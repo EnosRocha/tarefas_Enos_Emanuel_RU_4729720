@@ -7,6 +7,8 @@ import com.example.terefas_Enos_Emanuel_RU_4729720.repository.TarefaRespository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -21,6 +23,9 @@ public class TarefasService {
 
     @Transactional
     public void criarNovaTarerfaService(CriarTarefaDto criarTarefaDto) {
+        if (criarTarefaDto.dataDeEntrega().isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("data de entrega nao pode ser antes do dia de hoje");
+        }
         Tarefa tarefa = new Tarefa();
         tarefa.setNomeDaTarefa(criarTarefaDto.nome());
         tarefa.setDataDeEntrega(criarTarefaDto.dataDeEntrega());
@@ -47,7 +52,7 @@ public class TarefasService {
         if (atualizarTarefaDto.nome() != null) {
             tarefa.setNomeDaTarefa(atualizarTarefaDto.nome());
         }
-        if (atualizarTarefaDto.responsavel() != null) {
+        if (atualizarTarefaDto.responsavel() != null && !atualizarTarefaDto.dataDeEntrega().isBefore(LocalDate.now())) {
             tarefa.setResponsavel(atualizarTarefaDto.responsavel());
         }
         if (atualizarTarefaDto.dataDeEntrega() != null) {
@@ -58,7 +63,7 @@ public class TarefasService {
     }
 
     @Transactional
-    public void deleteTarefaService(Long id){
+    public void deleteTarefaService(Long id) {
         tarefaRespository.deleteById(id);
     }
 }

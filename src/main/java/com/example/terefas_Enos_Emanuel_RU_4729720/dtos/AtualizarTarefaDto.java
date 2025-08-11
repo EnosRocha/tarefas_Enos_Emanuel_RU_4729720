@@ -1,6 +1,6 @@
 package com.example.terefas_Enos_Emanuel_RU_4729720.dtos;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-public record AtualizarTarefaDto(String nome, LocalDateTime dataDeEntrega, String responsavel) {
+public record AtualizarTarefaDto(String nome, LocalDate dataDeEntrega, String responsavel) {
 }
